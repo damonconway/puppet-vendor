@@ -16,10 +16,11 @@
 #
 class vendor::params {
 
-  $ensure     = 'present'
-  $cfg_dir    = '/etc/vendor'
-  $backup_cfg = "$cfg_dir/backup.cfg"
-  $backup_svc = 'backupd'
+  $ensure        = 'present'
+  $cfg_dir       = '/etc/vendor'
+  $backup_cfg    = "$cfg_dir/backup.cfg"
+  $backup_enable = 'true'
+  $backup_svc    = 'backupd'
 
   case $::osfamily {
     'RedHat': {

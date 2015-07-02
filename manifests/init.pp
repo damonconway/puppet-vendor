@@ -16,6 +16,7 @@
 #
 class init (
   $client_token,
+  $backup_enable = $vendor::params::enable,
   $ensure = $vendor::params::ensure,
 ) inherits vendor::params {
 
