@@ -16,20 +16,24 @@
 #
 class vendor::config {
 
-  $backup_cfg = $vendor::params::backup_cfg
-  $ensure     = $vendor::ensure
+  $backup_cfg    = $vendor::params::backup_cfg
+  $backup_enable = $vendor::params::backup_enable
+  $client_token  = $vendor::client_token
+  $ensure        = $vendor::ensure
 
   $ensure_cfg = $ensure ? {
     'absent' => 'absent',
     default  => 'file'
   }
 
-  file { $backup_cfg:
-    ensure  => $ensure_cfg,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0600',
-    content => template('vendor/backup.cfg.erb'),
+  if str2bool($backup_enable) {
+    file { $backup_cfg:
+      ensure  => $ensure_cfg,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0600',
+      content => template('vendor/backup.cfg.erb'),
+    }
   }
   
 }
